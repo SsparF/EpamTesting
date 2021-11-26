@@ -2,10 +2,13 @@ package epam.Sasha;
 
 import epam.Sasha.constants.TimeConstants;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.security.Key;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,9 +37,15 @@ public class CalculatorPage extends BasePage{
     private By addEstimate2=new By.ByXPath("(//button[@class='md-raised md-primary cpc-button md-button md-ink-ripple'])[2]");
 
     private By total=new By.ByXPath("//b[@class='ng-binding' and contains (text(),'Total')]");
+    private By mailEstimateButton=new By.ByXPath("//button[@id='email_quote']");
+    private By inputMail=new By.ByXPath("//input[@id='input_473']");
+    private By sendMailButton=new By.ByXPath("(//button[@class='md-raised md-primary cpc-button md-button md-ink-ripple'])[7]");
 
     public CalculatorPage(WebDriver driver) {
         super(driver);
+    }
+
+    public void switchFrame() {
         driver.switchTo().frame(0);
         driver.switchTo().frame(iframe);
     }
@@ -50,30 +59,57 @@ public class CalculatorPage extends BasePage{
         driver.findElement(section);
     }
 
-    public void fillFirstModule() {
+    public void fillNumOfInstances() {
         WebElement instances=driver.findElement(numberInstances);
         instances.click();
         instances.sendKeys("4");
+    }
+
+    public void fillMachineType() {
         driver.findElement(machineType).click();
         driver.findElement(selectedMachineType).click();
+    }
+
+    public void clickEddToEstimate1() {
         driver.findElement(addEstimate1).click();
     }
 
-    public void fillSecondModule() {
+    public void fillNumOfNodes() {
         WebElement nodes=driver.findElement(numberNodes);
         nodes.click();
         nodes.sendKeys("2");
+    }
+
+    public void clickAddGpu() {
         driver.findElement(addGPU).click();
+    }
+
+    public void fillGpuType() {
         driver.findElement(gPUType).click();
         driver.findElement(selectGPUType).click();
+    }
+
+    public void fillNumOfGpu() {
         driver.findElement(numberGPU).click();
         driver.findElement(selectNumberGPU).click();
+    }
+
+    public void clickCpuOverCommit() {
         driver.findElement(cPUOverCommit).click();
+    }
+
+    public void fillDataCenterLocation() {
         driver.findElement(dataCenterLocation).click();
         WaitUntil(TimeConstants.PAGE_LOAD_TIMEOUT, ExpectedConditions.elementToBeClickable(selectDataCenterLocation));
         driver.findElement(selectDataCenterLocation).click();
+    }
+
+    public void fillCommittedUsage() {
         driver.findElement(committedUsage).click();
         driver.findElement(selectCommittedUsage).click();
+    }
+
+    public void clickEddToEstimate2() {
         driver.findElement(addEstimate2).click();
     }
 
@@ -84,4 +120,14 @@ public class CalculatorPage extends BasePage{
         m.find();
         return m.group();
     }
+
+    public void sendMail(String input) {
+        WaitUntil(TimeConstants.PAGE_LOAD_TIMEOUT, ExpectedConditions.elementToBeClickable(mailEstimateButton));
+        driver.findElement(mailEstimateButton).click();
+        WebElement mailInput = driver.findElement(inputMail);
+        mailInput.click();
+        mailInput.sendKeys(input);
+        driver.findElement(sendMailButton).click();
+    }
+
 }
