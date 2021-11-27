@@ -18,24 +18,9 @@ public class CalculatorPage extends BasePage{
     private String iframe="myFrame";
     private By section=new By.ByXPath("(//div[@title='Compute Engine'])[1]");
     //first block
-    private By numberInstances=new By.ByXPath("//input[@id='input_75']");
-    private By machineType=new By.ByXPath("//md-select-value[@id='select_value_label_71']");
-    private By selectedMachineType=new By.ByXPath("//md-option[@id='select_option_272']");
-    private By addEstimate1=new By.ByXPath("(//button[@class='md-raised md-primary cpc-button md-button md-ink-ripple'])[1]");
+    private FirstBlockPage firstBlockPage=new FirstBlockPage();
     //second block
-    private By numberNodes=new By.ByXPath("//input[@id='input_121']");
-    private By addGPU=new By.ByXPath("(//div[@class='md-container md-ink-ripple'])[3]");
-    private By gPUType=new By.ByXPath("//md-select[@id='select_442']");
-    private By selectGPUType=new By.ByXPath("//md-option[@id='select_option_449']");
-    private By numberGPU=new By.ByXPath("//md-select[@id='select_444']");
-    private By selectNumberGPU=new By.ByXPath("//md-option[@id='select_option_454']");
-    private By cPUOverCommit=new By.ByXPath("(//div[@class='md-container md-ink-ripple'])[4]");
-    private By dataCenterLocation=new By.ByXPath("//md-select-value[@id='select_value_label_119']");
-    private By selectDataCenterLocation=new By.ByXPath("//md-option[@id='select_option_288']");
-    private By committedUsage=new By.ByXPath("//md-select-value[@id='select_value_label_120']");
-    private By selectCommittedUsage=new By.ByXPath("//md-option[@id='select_option_140']");
-    private By addEstimate2=new By.ByXPath("(//button[@class='md-raised md-primary cpc-button md-button md-ink-ripple'])[2]");
-
+    private SecondBlockPage secondBlockPage=new SecondBlockPage();
     private By total=new By.ByXPath("//b[@class='ng-binding' and contains (text(),'Total')]");
     private By mailEstimateButton=new By.ByXPath("//button[@id='email_quote']");
     private By inputMail=new By.ByXPath("//input[@id='input_473']");
@@ -60,57 +45,57 @@ public class CalculatorPage extends BasePage{
     }
 
     public void fillNumOfInstances() {
-        WebElement instances=driver.findElement(numberInstances);
+        WebElement instances=driver.findElement(firstBlockPage.numberInstances);
         instances.click();
         instances.sendKeys("4");
     }
 
     public void fillMachineType() {
-        driver.findElement(machineType).click();
-        driver.findElement(selectedMachineType).click();
+        driver.findElement(firstBlockPage.machineType).click();
+        driver.findElement(firstBlockPage.selectedMachineType).click();
     }
 
     public void clickEddToEstimate1() {
-        driver.findElement(addEstimate1).click();
+        driver.findElement(firstBlockPage.addEstimate1).click();
     }
 
     public void fillNumOfNodes() {
-        WebElement nodes=driver.findElement(numberNodes);
+        WebElement nodes=driver.findElement(secondBlockPage.numberNodes);
         nodes.click();
         nodes.sendKeys("2");
     }
 
     public void clickAddGpu() {
-        driver.findElement(addGPU).click();
+        driver.findElement(secondBlockPage.addGPU).click();
     }
 
     public void fillGpuType() {
-        driver.findElement(gPUType).click();
-        driver.findElement(selectGPUType).click();
+        driver.findElement(secondBlockPage.gPUType).click();
+        driver.findElement(secondBlockPage.selectGPUType).click();
     }
 
     public void fillNumOfGpu() {
-        driver.findElement(numberGPU).click();
-        driver.findElement(selectNumberGPU).click();
+        driver.findElement(secondBlockPage.numberGPU).click();
+        driver.findElement(secondBlockPage.selectNumberGPU).click();
     }
 
     public void clickCpuOverCommit() {
-        driver.findElement(cPUOverCommit).click();
+        driver.findElement(secondBlockPage.cPUOverCommit).click();
     }
 
     public void fillDataCenterLocation() {
-        driver.findElement(dataCenterLocation).click();
-        WaitUntil(TimeConstants.PAGE_LOAD_TIMEOUT, ExpectedConditions.elementToBeClickable(selectDataCenterLocation));
-        driver.findElement(selectDataCenterLocation).click();
+        driver.findElement(secondBlockPage.dataCenterLocation).click();
+        WaitUntil(TimeConstants.PAGE_LOAD_TIMEOUT, ExpectedConditions.elementToBeClickable(secondBlockPage.selectDataCenterLocation));
+        driver.findElement(secondBlockPage.selectDataCenterLocation).click();
     }
 
     public void fillCommittedUsage() {
-        driver.findElement(committedUsage).click();
-        driver.findElement(selectCommittedUsage).click();
+        driver.findElement(secondBlockPage.committedUsage).click();
+        driver.findElement(secondBlockPage.selectCommittedUsage).click();
     }
 
     public void clickEddToEstimate2() {
-        driver.findElement(addEstimate2).click();
+        driver.findElement(secondBlockPage.addEstimate2).click();
     }
 
     public String totalCost() {
