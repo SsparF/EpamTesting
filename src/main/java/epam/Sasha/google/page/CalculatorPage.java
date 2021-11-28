@@ -1,20 +1,17 @@
-package epam.Sasha;
+package epam.Sasha.google.page;
 
+import epam.Sasha.BasePage;
 import epam.Sasha.constants.TimeConstants;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.security.Key;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class CalculatorPage extends BasePage{
+public class CalculatorPage extends BasePage {
 
     private By title=new By.ByXPath("//h2[contains (text(),'Google Cloud Pricing Calculator')]");
     private String iframe="myFrame";
@@ -44,9 +41,8 @@ public class CalculatorPage extends BasePage{
 
     public void selectSection(String sec) {
         List<WebElement> sections = driver.findElements(sectionСhoose);
-        List<String> sectionName = sections.stream().map(el -> el.getText()).collect(Collectors.toList());
         for (int i=0; i<sections.size(); i++) {
-            if (sectionName.get(i).contains(sec)) {
+            if (sections.get(i).getText().contains(sec)) {
                 sections.get(i).click();
                 break;
             }
@@ -65,9 +61,8 @@ public class CalculatorPage extends BasePage{
         Thread.sleep(3000);
         WaitUntil(TimeConstants.PAGE_LOAD_TIMEOUT, ExpectedConditions.presenceOfElementLocated(firstBlockPage.chooseSoftware));
         List<WebElement> allSoftware = driver.findElements(firstBlockPage.chooseSoftware);
-        List<String> sectionName = allSoftware.stream().map(el -> el.getText()).collect(Collectors.toList());
         for (int i=0; i<allSoftware.size(); i++) {
-            if (sectionName.get(i).contains(sft)) {
+            if (allSoftware.get(i).getText().contains(sft)) {
                 allSoftware.get(i).click();
                 break;
             }

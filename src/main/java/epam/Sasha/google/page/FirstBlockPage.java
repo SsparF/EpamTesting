@@ -1,4 +1,4 @@
-package epam.Sasha;
+package epam.Sasha.google.page;
 
 import org.openqa.selenium.By;
 

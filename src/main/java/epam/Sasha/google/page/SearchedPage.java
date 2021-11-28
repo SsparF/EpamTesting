@@ -1,9 +1,11 @@
-package epam.Sasha;
+package epam.Sasha.google.page;
 
+import epam.Sasha.BasePage;
+import epam.Sasha.google.page.CalculatorPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class SearchedPage extends BasePage{
+public class SearchedPage extends BasePage {
 
     private By title=new By.ByXPath("//h1[@class='devsite-search-title']");
     private By firstReference=new By.ByXPath("//a[@class='gs-title'][1]");

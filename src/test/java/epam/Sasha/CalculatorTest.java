@@ -1,5 +1,11 @@
 package epam.Sasha;
 
+import epam.Sasha.google.page.CalculatorPage;
+import epam.Sasha.google.page.MainPage;
+import epam.Sasha.google.page.SearchedPage;
+import epam.Sasha.yopMail.CheckLettersPage;
+import epam.Sasha.yopMail.RandomYopMailPage;
+import epam.Sasha.yopMail.YopMailPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -9,31 +15,30 @@ public class CalculatorTest extends BaseTest{
     public void test() throws InterruptedException {
         MainPage mainPage=new MainPage(driver);
         mainPage.open();
-        SearchedPage searchedPage=mainPage.searchCalculator("Google Cloud Pricing Calculator");
+        SearchedPage searchedPage=mainPage.searchCalculator(Reader.getProperty("search.value"));
         Assert.assertTrue(searchedPage.isOpened());
         CalculatorPage calculatorPage=searchedPage.goToCalculator();
         Thread.sleep(2000);
         calculatorPage.switchFrame();
         Assert.assertTrue(calculatorPage.isOpened());
-        calculatorPage.selectSection("Compute Engine");
-        calculatorPage.fillNumOfInstances("4");
-        calculatorPage.chooseSoftware("Free: Debian, CentOS, CoreOS, Ubuntu or BYOL (Bring Your Own License)");
-        calculatorPage.fillMachineClass("Regular");
-        calculatorPage.fillMachineType("e2-standard-8 (vCPUs: 8, RAM: 32GB)");
+        calculatorPage.selectSection(Reader.getProperty("section"));
+        calculatorPage.fillNumOfInstances(Reader.getProperty("num.of.instances"));
+        calculatorPage.chooseSoftware(Reader.getProperty("software"));
+        calculatorPage.fillMachineClass(Reader.getProperty("machine.class"));
+        calculatorPage.fillMachineType(Reader.getProperty("machine.type"));
         calculatorPage.clickEddToEstimate1();
-        calculatorPage.fillNumOfNodes("2");
+        calculatorPage.fillNumOfNodes(Reader.getProperty("num.of.nodes"));
         calculatorPage.clickAddGpu();
-        calculatorPage.fillGpuType("NVIDIA Tesla T4");
-        calculatorPage.fillNumOfGpu("4");
+        calculatorPage.fillGpuType(Reader.getProperty("gpu.type"));
+        calculatorPage.fillNumOfGpu(Reader.getProperty("num.of.gpu"));
         calculatorPage.clickCpuOverCommit();
-        calculatorPage.fillLocalSSD("24x375 GB");
-        calculatorPage.fillDataCenterLocation("Los Angeles (us-west2)");
-        calculatorPage.fillCommittedUsage("1 Year");
+        calculatorPage.fillLocalSSD(Reader.getProperty("local.ssd"));
+        calculatorPage.fillDataCenterLocation(Reader.getProperty("data.center.location"));
+        calculatorPage.fillCommittedUsage(Reader.getProperty("committed.usage"));
         calculatorPage.clickEddToEstimate2();
         String originalTotalCost=calculatorPage.totalCost();
-        System.out.println(originalTotalCost);
         YopMailPage yopMailPage=new YopMailPage(driver);
-        calculatorPage.openNewWindow("https://yopmail.com/");
+        calculatorPage.openNewWindow(Reader.getProperty("yop.mail"));
         Assert.assertTrue(yopMailPage.isOpened());
         RandomYopMailPage randomYopMailPage=yopMailPage.makeMail();
         String randomMail=randomYopMailPage.takeMail();

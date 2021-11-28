@@ -1,5 +1,6 @@
-package epam.Sasha;
+package epam.Sasha.yopMail;
 
+import epam.Sasha.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

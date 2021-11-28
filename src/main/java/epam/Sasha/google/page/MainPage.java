@@ -1,12 +1,12 @@
-package epam.Sasha;
+package epam.Sasha.google.page;
 
 
+import epam.Sasha.BasePage;
 import epam.Sasha.constants.TimeConstants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MainPage extends BasePage {
